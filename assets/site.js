@@ -1,4 +1,11 @@
 // RMD site behaviour — no dependencies
+// restart the fade whenever a panel's content is replaced
+function softIn(el) {
+  el.classList.remove('soft-in');
+  void el.offsetWidth;
+  el.classList.add('soft-in');
+}
+
 (function () {
   var header = document.querySelector('header.site');
   var menu = document.querySelector('.menu-btn');
@@ -27,6 +34,7 @@
     function show(key) {
       var r = data[key];
       chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.key === key); });
+      softIn(out);
       out.innerHTML = r.steps.map(function (s) {
         return '<a class="step" href="' + s.href + '"><img src="' + s.img + '" alt="" loading="lazy" width="76" height="76">' +
           '<div><small>' + s.when + '</small><b>' + s.name + '</b><span>' + s.why + '</span></div></a>';
@@ -69,10 +77,12 @@
     var open = b.getAttribute('aria-pressed') === 'true';
     wrap.querySelectorAll('.chip-ing').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
     if (open) {
+      softIn(note);
       note.innerHTML = '<span class="hint">' + note.dataset.empty + ' 👆</span>';
       return;
     }
     b.setAttribute('aria-pressed', 'true');
+    softIn(note);
     note.innerHTML = '<span class="tag">' + b.dataset.role + '</span><b>' + b.dataset.name + '</b><p>' + b.dataset.note + '</p>';
   });
 })();

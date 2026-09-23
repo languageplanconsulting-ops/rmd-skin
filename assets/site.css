@@ -14,6 +14,7 @@
   --shadow:0 2px 0 rgba(35,31,32,.05), 0 14px 30px -18px rgba(35,31,32,.35);
   --shadow-lift:0 4px 0 rgba(35,31,32,.07), 0 26px 40px -22px rgba(35,31,32,.4);
   --max:1180px;
+  --ease:cubic-bezier(.22,.61,.36,1); --fast:.18s; --slow:.32s;
   --head:"Mitr","Bai Jamjuree",system-ui,sans-serif;
   --body:"IBM Plex Sans Thai",system-ui,sans-serif;
   --hand:"Itim","IBM Plex Sans Thai",cursive;
@@ -60,9 +61,10 @@ section{padding:64px 0;position:relative}
 /* --- buttons ------------------------------------------------------------ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;
   border-radius:999px;font:500 1rem/1 var(--head);text-decoration:none;border:2px solid var(--ink);cursor:pointer;
-  background:var(--paper);color:var(--ink);box-shadow:0 4px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .15s}
-.btn:hover{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
-.btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--ink)}
+  background:var(--paper);color:var(--ink);box-shadow:0 4px 0 var(--ink);
+  transition:transform var(--slow) var(--ease),box-shadow var(--slow) var(--ease),background var(--slow) var(--ease),filter var(--slow) var(--ease)}
+.btn:hover{transform:translateY(1px);box-shadow:0 3px 0 var(--ink);filter:brightness(1.03)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink);transition-duration:var(--fast)}
 .btn-shopee{background:#ee4d2d;color:#fff;border-color:#a8290f;box-shadow:0 4px 0 #a8290f}
 .btn-shopee:hover{box-shadow:0 2px 0 #a8290f}
 .btn-dark{background:var(--ink);color:#fff}
@@ -127,7 +129,8 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(253,250,244,.94);ba
 .chip:hover{border-color:var(--seb);transform:translateY(-1px)}
 .chip[aria-pressed=true]{background:var(--seb);border-color:var(--seb);color:#fff}
 .routine{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
-.step{display:flex;gap:13px;align-items:center;background:var(--seb-tint);border:2px solid transparent;border-radius:20px;padding:12px;text-decoration:none;transition:.15s}
+.step{display:flex;gap:13px;align-items:center;background:var(--seb-tint);border:2px solid transparent;border-radius:20px;padding:12px;text-decoration:none;
+  transition:border-color var(--slow) var(--ease),transform var(--slow) var(--ease)}
 .step:hover{border-color:var(--seb);transform:translateY(-2px)}
 .step img{width:70px;height:70px;border-radius:14px;object-fit:cover;flex:none;background:#fff}
 .step small{display:block;color:var(--seb);font:500 .74rem/1 var(--head);margin-bottom:6px}
@@ -139,8 +142,8 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(253,250,244,.94);ba
 /* --- product cards ------------------------------------------------------ */
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(248px,1fr))}
 .card{background:var(--paper);border:2px solid var(--ink);border-radius:var(--radius);overflow:hidden;
-  display:flex;flex-direction:column;text-decoration:none;box-shadow:0 4px 0 var(--ink);transition:transform .16s,box-shadow .16s}
-.card:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 8px 0 var(--ink)}
+  display:flex;flex-direction:column;text-decoration:none;box-shadow:0 4px 0 var(--ink);transition:transform var(--slow) var(--ease),box-shadow var(--slow) var(--ease)}
+.card:hover{transform:translateY(-3px) rotate(-.35deg);box-shadow:0 7px 0 var(--ink)}
 .card .ph{aspect-ratio:1/1;position:relative;background:var(--seb-tint);overflow:hidden}
 .card.baby .ph{background:var(--baby-soft)}
 .card.dry .ph{background:var(--dry-soft)}
@@ -166,7 +169,7 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(253,250,244,.94);ba
 .lines{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .line-card{border-radius:30px;padding:36px;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;
   text-decoration:none;position:relative;overflow:hidden;border:2px solid var(--ink);box-shadow:0 5px 0 var(--ink);transition:.16s}
-.line-card:hover{transform:translateY(-4px);box-shadow:0 9px 0 var(--ink)}
+.line-card:hover{transform:translateY(-3px);box-shadow:0 8px 0 var(--ink)}
 .line-card.seb{background:var(--seb-soft)}
 .line-card.baby{background:var(--baby-soft)}
 .line-card h3{font-size:1.75rem;margin-bottom:8px}
@@ -481,7 +484,7 @@ img.cut{mix-blend-mode:normal !important}
 .lg.kep,.chip-ing.kep{background:#f6eaf1;color:#8c4a6b}
 .inci-chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip-ing{font:500 .86rem/1.2 var(--head);border:1.5px solid var(--ink);border-radius:12px;padding:9px 12px;
-  cursor:pointer;transition:transform .12s,box-shadow .12s}
+  cursor:pointer;transition:transform var(--slow) var(--ease),box-shadow var(--slow) var(--ease),background var(--slow) var(--ease),color var(--slow) var(--ease)}
 .chip-ing:hover{transform:translateY(-1px);box-shadow:0 3px 0 var(--ink)}
 .chip-ing[aria-pressed=true]{background:var(--ink);color:#fff;box-shadow:0 3px 0 var(--ink)}
 .inci-note{margin-top:18px;background:var(--paper);border:2px dashed var(--line-2);border-radius:20px;padding:18px 20px;min-height:92px}
@@ -507,3 +510,16 @@ table.facts th{font:500 .9rem var(--head);width:30%;background:var(--seb-tint);c
 .inci-all dt{font:500 .92rem var(--head)}.inci-all dt span{color:var(--muted);font-weight:400}
 .inci-all dd{margin:0 0 4px;color:var(--ink-2);font-size:.9rem}
 .about-list{padding-left:1.2em}.about-list li{margin-bottom:8px}
+.btn-line{background:#06c755;color:#fff;border-color:#04913e;box-shadow:0 4px 0 #04913e}
+.btn-line:hover{box-shadow:0 2px 0 #04913e}
+.btn-line.btn-sm{box-shadow:0 3px 0 #04913e}
+.buy-opt .ic svg{width:26px;height:26px}
+
+/* content that swaps in on a tap fades in instead of snapping */
+@keyframes soft-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.soft-in{animation:soft-in var(--slow) var(--ease)}
+.faq summary::after{transition:transform var(--slow) var(--ease)}
+.faq details[open] .ans{animation:soft-in var(--slow) var(--ease)}
+.arrow-btn,.prod-inline,.art,.set,.buy-opt,.pill,.type,.active{transition:transform var(--slow) var(--ease),box-shadow var(--slow) var(--ease),border-color var(--slow) var(--ease)}
+a{transition:color var(--fast) var(--ease)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
