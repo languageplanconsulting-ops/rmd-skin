@@ -24,25 +24,76 @@ function softIn(el) {
     });
   });
 
-  // skin finder
-  var finder = document.querySelector('[data-finder]');
-  if (finder) {
-    var data = JSON.parse(document.getElementById('finder-data').textContent);
-    var out = finder.querySelector('.routine');
-    var note = finder.querySelector('.finder-note');
-    var chips = finder.querySelectorAll('.chip');
-    function show(key) {
-      var r = data[key];
-      chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.key === key); });
-      softIn(out);
-      out.innerHTML = r.steps.map(function (s) {
-        return '<a class="step" href="' + s.href + '"><img src="' + s.img + '" alt="" loading="lazy" width="76" height="76">' +
-          '<div><small>' + s.when + '</small><b>' + s.name + '</b><span>' + s.why + '</span></div></a>';
+  // skin quiz: a few questions, then a routine you can order
+  var quiz = document.querySelector('[data-quiz]');
+  if (quiz) {
+    var D = JSON.parse(document.getElementById('quiz-data').textContent);
+    var body = quiz.querySelector('.q-body');
+    var bar = quiz.querySelector('.q-bar span');
+    var stack = [], state = {}, first = 'who';
+
+    function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    function progress(done, total) { bar.style.width = Math.round(done / total * 100) + '%'; }
+
+    function ask(id) {
+      var s = D.steps[id];
+      if (!s) return;
+      progress(stack.length, stack.length + 2);
+      var opts = s.opts.map(function (o, i) {
+        return '<button class="q-opt" data-i="' + i + '"><i aria-hidden="true">' + o.emoji + '</i><span>' + esc(o.label) + '</span></button>';
       }).join('');
-      note.textContent = r.note;
+      body.innerHTML = '<div class="q-head"><small>ข้อ ' + (stack.length + 1) + '</small><h3>' + esc(s.q) + '</h3>' +
+        '<p class="muted">' + esc(s.help) + '</p></div><div class="q-opts">' + opts + '</div>' +
+        (stack.length ? '<button class="q-back">← ย้อนกลับ</button>' : '');
+      softIn(body);
+      body.querySelectorAll('.q-opt').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var o = s.opts[+b.dataset.i];
+          stack.push({ id: id, state: JSON.parse(JSON.stringify(state)) });
+          Object.keys(o.set || {}).forEach(function (k) { state[k] = o.set[k]; });
+          var next = o.next.replace(/\{(\w+)\}/g, function (_, k) { return state[k]; });
+          if (next.indexOf('r:') === 0) show(next.slice(2)); else ask(next);
+        });
+      });
+      var back = body.querySelector('.q-back');
+      if (back) back.addEventListener('click', function () {
+        var prev = stack.pop();
+        state = prev.state;
+        ask(prev.id);
+      });
     }
-    chips.forEach(function (c) { c.addEventListener('click', function () { show(c.dataset.key); }); });
-    show(chips[0].dataset.key);
+
+    function show(key) {
+      var r = D.results[key];
+      if (!r) return ask(first);
+      progress(1, 1);
+      var steps = r.steps.map(function (s, i) {
+        return '<div class="q-step"><img src="' + s.img + '" alt="" loading="lazy" width="76" height="76">' +
+          '<div><small>' + esc(s.when) + '</small><b>' + esc(s.name) + '</b><span>' + esc(s.why) + '</span>' +
+          '<a class="q-link" href="' + s.href + '">ดูรายละเอียด · ' + esc(s.price) + ' →</a></div></div>';
+      }).join('');
+      var phase = state.phase && D.phase[state.phase] ? '<p class="q-phase">⏱️ ' + esc(D.phase[state.phase]) + '</p>' : '';
+      body.innerHTML =
+        '<div class="q-result"><span class="eyebrow">✅ ผลลัพธ์ของคุณ</span>' +
+        '<h3>' + esc(r.name) + '</h3><p class="q-say">' + esc(r.say) + '</p>' +
+        '<a class="q-read" href="' + r.cond + '">📖 อ่านเรื่อง' + esc(r.condName) + 'แบบละเอียด →</a>' +
+        '<h4>รูทีนที่เราแนะนำ</h4><div class="q-steps">' + steps + '</div>' + phase +
+        '<p class="q-tip">💡 ' + esc(r.tip) + '</p>' +
+        '<p class="q-see"><b>ควรพบแพทย์ถ้า</b> ' + esc(r.see) + '</p>' +
+        (r.total ? '<p class="q-total">รวมทั้งรูทีน <b>' + esc(r.total) + '</b> <small>ทักไลน์สั่งได้ เก็บเงินปลายทาง ส่งฟรีเมื่อครบเซ็ต</small></p>' : '') +
+        '<div class="q-ctas"><a class="btn btn-line" href="' + D.line + '" target="_blank" rel="noopener">ส่งรูทีนนี้ให้เราทางไลน์ ' + D.lineId + '</a>' +
+        '<a class="btn btn-shopee" href="' + D.shop + '" target="_blank" rel="noopener">สั่งที่ Shopee</a></div>' +
+        '<button class="q-restart">↺ เริ่มใหม่</button></div>';
+      softIn(body);
+      body.querySelector('.q-restart').addEventListener('click', function () {
+        stack = []; state = {}; history.replaceState(null, '', location.pathname); ask(first);
+      });
+      history.replaceState(null, '', '#r=' + key);
+    }
+
+    var hash = (location.hash.match(/^#r=(\w+)$/) || [])[1];
+    if (hash && D.results[hash]) show(hash); else ask(first);
   }
 
   // sticky buy bar appears once the main buy button scrolls away

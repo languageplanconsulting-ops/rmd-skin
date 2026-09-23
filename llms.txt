@@ -25,6 +25,16 @@
 - Baby skin: Head to Toe Wash, then Soothing Lotion within 3 minutes of towelling dry.
 - Very dry, itchy skin in older adults: Defensil Calming Cream DCC after bathing and whenever itchy.
 
+## Skin problems explained (Thai dossiers)
+
+- [รังแค: สาเหตุ ประเภท และวิธีดูแลหนังศีรษะ](https://www.rmd-skin.com/conditions/dandruff): รังแคคือเซลล์ผิวหนังบนหนังศีรษะที่หลุดลอกเร็วกว่าปกติจนมองเห็นเป็นขุยหรือสะเก็ด พบได้ประมาณครึ่งหนึ่งของผู้ใหญ่ทั่วโลก ไม่ติดต่อ และไม่ได้แปลว่าสกปรก
+- [ผื่นภูมิแพ้ผิวหนังในเด็ก (Eczema): อาการ สาเหตุ และการดูแล](https://www.rmd-skin.com/conditions/baby-eczema): ผื่นภูมิแพ้ผิวหนัง หรือ Atopic Dermatitis คือภาวะผิวอักเสบเรื้อรังที่พบบ่อยที่สุดในเด็ก ผิวจะแห้ง คัน และเป็น ๆ หาย ๆ มักเริ่มในขวบปีแรกและดีขึ้นตามวัยในเด็กจำนวนมาก
+- [ไขบนหัวทารก (Cradle Cap): คืออะไร หายเองไหม ดูแลยังไง](https://www.rmd-skin.com/conditions/cradle-cap): ไขบนหัวทารกคือสะเก็ดสีเหลืองมันที่เกาะบนหนังศีรษะของทารก พบบ่อยมากในช่วง 3 เดือนแรก ไม่เจ็บ ไม่คันมาก ไม่ติดต่อ และส่วนใหญ่หายได้เองภายในไม่กี่เดือน
+- [สิวเชื้อรา (สิวผด Malassezia): ต่างจากสิวทั่วไปอย่างไร](https://www.rmd-skin.com/conditions/fungal-acne): สิวเชื้อรา หรือ Malassezia folliculitis คือภาวะที่ยีสต์บนผิวเติบโตมากเกินในรูขุมขน ทำให้เกิดตุ่มเล็ก ๆ ขนาดใกล้เคียงกัน คันกว่าสิวทั่วไป และมักไม่ตอบสนองต่อยาแต้มสิวธรรมดา
+- [ผิวแห้ง คันทั้งตัว (Xerosis): สาเหตุและวิธีดูแล](https://www.rmd-skin.com/conditions/dry-itchy-skin): ผิวแห้งจนคันทั้งตัวเป็นปัญหาที่พบบ่อย โดยเฉพาะในผู้สูงอายุ ช่วงอากาศเย็น และคนที่อยู่ในห้องแอร์นาน ๆ ส่วนใหญ่ดูแลที่บ้านได้ แต่บางกรณีอาการคันเป็นสัญญาณของโรคอื่น
+- [เซ็บเดิร์มคืออะไร](https://www.rmd-skin.com/seb-control): seborrheic dermatitis explained, with the Seb Control routine.
+- Interactive skin quiz (3-4 questions, returns a routine): https://www.rmd-skin.com/quiz
+
 ## Skin guides (Thai)
 
 - [ทำไมเซ็บเดิร์มถึงกลับมาเป็นซ้ำ 5 สาเหตุและวิธีคุม](https://www.rmd-skin.com/guide/why-seb-derm-keeps-coming-back): เซ็บเดิร์มมีธรรมชาติกลับมาเป็นซ้ำ (relapsing) ไม่ใช่เพราะดูแลผิดเสมอไป
